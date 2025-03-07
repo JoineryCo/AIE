@@ -1,20 +1,20 @@
 import { ProjectProcessingHub } from "../../../components/project/ProjectProcessingHub";
+import type { Metadata } from 'next';
 
 interface ProjectPageProps {
   params: {
     id: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-/**
- * Project Route
- * 
- * This route handles individual project workflow as described in Chapter 4
- * of the UX/UI documentation. It renders the ProjectProcessingHub component
- * which provides the workspace for working on a specific project.
- * 
- * This is separate from the Dashboard (Chapter 3) which shows all projects.
- */
+// You can also add this for better metadata handling
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  return {
+    title: `Project ${params.id}`,
+  };
+}
+
 export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <ProjectProcessingHub 
